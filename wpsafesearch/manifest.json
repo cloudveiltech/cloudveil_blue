@@ -1,0 +1,21 @@
+{
+  "name": "WebPulse Safe Search",
+  "manifest_version": 2,
+  "version": "1.0",
+  "applications": {
+    "gecko": {
+      "id": "WebPulse@search.mozilla.org"
+    }
+  },
+  "hidden": false,
+
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "WebPulse Safe Search",
+      "search_url": "http://www.wpsafesearch.com/search.jsp",
+      "search_url_get_params": "q={searchTerms}&&r=o",
+      "suggest_url": "http://www.wpsafesearch.com/search.jsp",
+      "suggest_url_get_params": "q={searchTerms}&r=o"
+    }
+  }
+}

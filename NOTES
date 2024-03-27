@@ -1,0 +1,57 @@
+1. Add to BrowserApp.java
+
+private boolean isLockerInstalled() {
+    String packageName = "org.cloudveil.locker";
+    PackageManager pm = getPackageManager();
+    boolean installed = false;
+    try {
+        pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+        installed = true;
+    } catch (PackageManager.NameNotFoundException e) {
+        installed = false;
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory( Intent.CATEGORY_HOME );
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
+    }
+    return installed;
+}
+
+
+2. Add calls at these places in BrowserApp.java
+
+@Override
+public void onResume() {
+    super.onResume();
+    if(!isLockerInstalled()) {
+        Toast.makeText(this, "CloudVeil Locker Not Installed", Toast.LENGTH_LONG).show();
+        return;
+    }
+
+
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    if (!isSupportedSystem()) {
+        // This build does not support the Android version of the device; Exit early.
+        super.onCreate(savedInstanceState);
+        return;
+    }
+    if(!isLockerInstalled()) {
+        Toast.makeText(this, "CloudVeil Locker Not Installed", Toast.LENGTH_LONG).show();
+        super.onCreate(savedInstanceState);
+        return;
+    }
+
+@Override
+public void onStart() {
+         super.onStart();
+         if(!isLockerInstalled()) {
+             Toast.makeText(this, "CloudVeil Locker Not Installed", Toast.LENGTH_LONG).show();
+             return;
+         }
+
+
+
+
+################
+Take a look in  mobile/locales/en-US/chrome/region.properties for search engine order.
